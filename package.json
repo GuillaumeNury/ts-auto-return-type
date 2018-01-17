@@ -1,7 +1,8 @@
 {
 	"name": "ts-auto-return-type",
 	"version": "1.0.0",
-	"description": "",
+	"description":
+		"Use typescript API in order to show functions without return type.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"directories": {
@@ -26,19 +27,14 @@
 		"ts-node": "^4.1.0"
 	},
 	"jest": {
-		"moduleFileExtensions": [
-			"ts",
-			"js"
-		],
+		"moduleFileExtensions": ["ts", "js"],
 		"transform": {
 			"\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
 		},
 		"testRegex": "/src/.*\\.spec\\.ts$",
 		"mapCoverage": true,
 		"coverageDirectory": "./coverage/",
-		"collectCoverageFrom": [
-			"src/**/*.ts"
-		],
+		"collectCoverageFrom": ["src/**/*.ts"],
 		"collectCoverage": true
 	}
 }
