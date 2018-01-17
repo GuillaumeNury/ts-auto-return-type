@@ -18,27 +18,13 @@ export function isFunctionNode(
 export function functionsAtPosition(
 	file: ts.SourceFile,
 	nodes: FonctionNode[],
-	_position: IPosition,
+	{ line, character }: IPosition,
 ): FonctionNode[] {
-	const position = lineAndCharacterToPosition(file, _position);
+	const position = file.getPositionOfLineAndCharacter(line, character);
 
 	return nodes.filter(
 		node => position >= node.getStart() && position <= node.getEnd(),
 	);
-}
-
-export function positionToLineAndCharacter(
-	file: ts.SourceFile,
-	position: number,
-): IPosition {
-	return file.getLineAndCharacterOfPosition(position);
-}
-
-export function lineAndCharacterToPosition(
-	file: ts.SourceFile,
-	{ line, character }: IPosition,
-): number {
-	return file.getPositionOfLineAndCharacter(line, character);
 }
 
 export function getTextModificationForVisitedFunctions(

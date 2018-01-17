@@ -1,0 +1,10 @@
+dist/examples/
+dist/src/*.spec.*
+src/
+examples/
+coverage/
+index.ts
+yarn.lock
+.prettierrc
+.travis.yml
+tsconfig.json

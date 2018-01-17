@@ -5,7 +5,8 @@ import {
 	ITextToInsert,
 	IVisitedFunction,
 } from './models';
-import { isFunctionNode, positionToLineAndCharacter } from './utils';
+
+import { isFunctionNode } from './utils';
 
 export function enrichFunctionNodes(
 	file: ts.SourceFile,
@@ -96,8 +97,7 @@ function getTextToInsert(
 	}
 
 	const text = `: ${type}`;
-	const position = positionToLineAndCharacter(
-		file,
+	const position = file.getLineAndCharacterOfPosition(
 		parenthesisPosition,
 	);
 

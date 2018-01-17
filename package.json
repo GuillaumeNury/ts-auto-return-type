@@ -2,12 +2,15 @@
 	"name": "ts-auto-return-type",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"directories": {
 		"test": "tests"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "rimraf dist && tsc",
+		"test": "jest",
+		"prepare": "npm run build"
 	},
 	"keywords": [],
 	"author": "",
@@ -16,7 +19,26 @@
 		"typescript": "^2.6.2"
 	},
 	"devDependencies": {
+		"@types/jest": "^22.0.1",
 		"@types/node": "^9.3.0",
+		"jest": "^22.1.2",
+		"ts-jest": "^22.0.1",
 		"ts-node": "^4.1.0"
+	},
+	"jest": {
+		"moduleFileExtensions": [
+			"ts",
+			"js"
+		],
+		"transform": {
+			"\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+		},
+		"testRegex": "/src/.*\\.spec\\.ts$",
+		"mapCoverage": true,
+		"coverageDirectory": "./coverage/",
+		"collectCoverageFrom": [
+			"src/**/*.ts"
+		],
+		"collectCoverage": true
 	}
 }
