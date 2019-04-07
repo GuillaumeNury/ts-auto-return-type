@@ -33,6 +33,7 @@
 		},
 		"testRegex": "/src/.*\\.spec\\.ts$",
 		"mapCoverage": true,
+		"testURL": "http://localhost/",
 		"coverageDirectory": "./coverage/",
 		"collectCoverageFrom": ["src/**/*.ts"],
 		"collectCoverage": true
