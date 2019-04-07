@@ -32,7 +32,7 @@ describe('Execution', () => {
 		it('should return two lines if cursor on basicFunction3', () => {
 			const modifications = getModificationsAtPosition(
 				`${__dirname}/../test-data/basic.ts`,
-				{ line: 22, character: 13 },
+				{ line: 22, character: 12 },
 			);
 
 			expect(modifications).toEqual([
