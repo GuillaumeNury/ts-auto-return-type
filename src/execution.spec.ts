@@ -55,7 +55,7 @@ describe('Execution', () => {
 	});
 
 	describe('getModificationsForFile', () => {
-		it('should return 6 lines on test-data/basic.ts', () => {
+		it('should return 9 lines on test-data/basic.ts', () => {
 			const modifications = getModificationsForFile(
 				`${__dirname}/../test-data/basic.ts`,
 			);
@@ -73,6 +73,13 @@ describe('Execution', () => {
 					position: {
 						line: 13,
 						character: 25,
+					},
+				},
+				{
+					text: ': number',
+					position: {
+						line: 14,
+						character: 30,
 					},
 				},
 				{
@@ -101,6 +108,20 @@ describe('Execution', () => {
 					position: {
 						line: 35,
 						character: 21,
+					},
+				},
+				{
+					text: ': string',
+					position: {
+						line: 41,
+						character: 33,
+					},
+				},
+				{
+					text: ': string',
+					position: {
+						line: 46,
+						character: 11,
 					},
 				},
 			]);

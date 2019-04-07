@@ -27,31 +27,29 @@ export function enrichFunctionNode(
 	node: FonctionNode,
 	typeChecker: ts.TypeChecker,
 ): IVisitedFunction[] {
-	const symbol = typeChecker.getSymbolAtLocation(
-		node.name as any, // Hack: it do not work with just "node"
-	);
+	const typeOfFunction = typeChecker.getTypeAtLocation(node);
 
-	if (symbol !== undefined) {
-		const typeOfFunction = typeChecker.getTypeOfSymbolAtLocation(
-			symbol,
-			node,
-		);
+	return typeOfFunction.getCallSignatures().map(signature => {
+		const type = signature.getReturnType();
+		const typeAsString = typeChecker.typeToString(type);
 
-		return typeOfFunction.getCallSignatures().map(signature => {
-			const type = signature.getReturnType();
-			const typeAsString = typeChecker.typeToString(type);
+		const textToInsert = getTextToInsert(file, node, typeAsString);
 
-			const textToInsert = getTextToInsert(file, node, typeAsString);
+		const result: IVisitedFunction = {
+			inferredReturnType: typeAsString,
+			textToInsert,
+		};
 
-			return {
-				name: symbol.name,
-				inferredReturnType: typeAsString,
-				textToInsert,
-			};
-		});
-	}
+		let symbol: ts.Symbol | undefined;
+		if (node.name) {
+			symbol = typeChecker.getSymbolAtLocation(node.name);
+			if (typeof symbol !== 'undefined') {
+				result.name = symbol.name;
+			}
+		}
 
-	return [];
+		return result;
+	});
 }
 
 export function getFunctionNodes(node: ts.Node): FonctionNode[] {
