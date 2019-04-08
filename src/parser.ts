@@ -34,21 +34,14 @@ export function enrichFunctionNode(
 		const typeAsString = typeChecker.typeToString(type);
 
 		const textToInsert = getTextToInsert(file, node, typeAsString);
+		const symbol =
+			node.name && typeChecker.getSymbolAtLocation(node.name);
 
-		const result: IVisitedFunction = {
+		return {
 			inferredReturnType: typeAsString,
 			textToInsert,
+			name: symbol && symbol.name,
 		};
-
-		let symbol: ts.Symbol | undefined;
-		if (node.name) {
-			symbol = typeChecker.getSymbolAtLocation(node.name);
-			if (typeof symbol !== 'undefined') {
-				result.name = symbol.name;
-			}
-		}
-
-		return result;
 	});
 }
 
