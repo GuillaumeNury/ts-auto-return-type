@@ -4,6 +4,7 @@ import {
 	FonctionNode,
 	ITextToInsert,
 	IVisitedFunction,
+	DEFAULT_CONFIG,
 } from './models';
 import {
 	functionsAtPosition,
@@ -14,19 +15,19 @@ import { isFunctionNode } from './utils';
 
 describe('Utils', () => {
 	describe('isFunctionNode', () => {
-		it('should return true if FunctionDeclaration', () => {
+		it('should return true when FunctionDeclaration and DEFAULT_CONFIG', () => {
 			const node = {
 				kind: ts.SyntaxKind.FunctionDeclaration,
 			} as ts.Node;
 
-			expect(isFunctionNode(node)).toBe(true);
+			expect(isFunctionNode(node, DEFAULT_CONFIG)).toBe(true);
 		});
-		it('should return true if MethodDeclaration', () => {
+		it('should return true when MethodDeclaration and DEFAULT_CONFIG', () => {
 			const node = {
 				kind: ts.SyntaxKind.MethodDeclaration,
 			} as ts.Node;
 
-			expect(isFunctionNode(node)).toBe(true);
+			expect(isFunctionNode(node, DEFAULT_CONFIG)).toBe(true);
 		});
 	});
 	describe('functionsAtPosition', () => {

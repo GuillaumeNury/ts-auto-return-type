@@ -2,6 +2,7 @@ import {
 	getModificationsAtPosition,
 	getModificationsForFile,
 } from './executions';
+import { DEFAULT_CONFIG } from './models';
 
 describe('Execution', () => {
 	describe('getModificationsAtPosition', () => {
@@ -9,6 +10,7 @@ describe('Execution', () => {
 			const modifications = getModificationsAtPosition(
 				`${__dirname}/../test-data/basic.ts`,
 				{ line: 4, character: 6 },
+				DEFAULT_CONFIG,
 			);
 
 			expect(modifications).toEqual([]);
@@ -17,6 +19,7 @@ describe('Execution', () => {
 			const modifications = getModificationsAtPosition(
 				`${__dirname}/../test-data/basic.ts`,
 				{ line: 9, character: 7 },
+				DEFAULT_CONFIG,
 			);
 
 			expect(modifications).toEqual([
@@ -33,6 +36,7 @@ describe('Execution', () => {
 			const modifications = getModificationsAtPosition(
 				`${__dirname}/../test-data/basic.ts`,
 				{ line: 22, character: 12 },
+				DEFAULT_CONFIG,
 			);
 
 			expect(modifications).toEqual([
@@ -58,6 +62,7 @@ describe('Execution', () => {
 		it('should return 9 lines on test-data/basic.ts', () => {
 			const modifications = getModificationsForFile(
 				`${__dirname}/../test-data/basic.ts`,
+				DEFAULT_CONFIG,
 			);
 
 			expect(modifications).toEqual([
@@ -129,6 +134,7 @@ describe('Execution', () => {
 		it('should return empty array on test-data/utils.ts', () => {
 			const modifications = getModificationsForFile(
 				`${__dirname}/../test-data/utils.ts`,
+				DEFAULT_CONFIG,
 			);
 
 			expect(modifications).toEqual([]);

@@ -5,15 +5,18 @@ import {
 	IPosition,
 	ITextToInsert,
 	IVisitedFunction,
+	ITsAutoReturnTypeConfig,
 } from './models';
 
 export function isFunctionNode(
 	node: ts.Node,
+	config: ITsAutoReturnTypeConfig,
 ): node is ts.FunctionDeclaration | ts.MethodDeclaration {
 	return (
-		ts.isFunctionDeclaration(node) ||
-		ts.isMethodDeclaration(node) ||
-		ts.isArrowFunction(node)
+		(config.inferFunctionReturnType &&
+			ts.isFunctionDeclaration(node)) ||
+		(config.inferMethodReturnType && ts.isMethodDeclaration(node)) ||
+		(config.inferArrowFunctionReturnType && ts.isArrowFunction(node))
 	);
 }
 

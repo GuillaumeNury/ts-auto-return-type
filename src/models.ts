@@ -1,5 +1,17 @@
 import * as ts from 'typescript';
 
+export const DEFAULT_CONFIG: ITsAutoReturnTypeConfig = {
+	inferArrowFunctionReturnType: true,
+	inferFunctionReturnType: true,
+	inferMethodReturnType: true,
+};
+
+export interface ITsAutoReturnTypeConfig {
+	inferArrowFunctionReturnType: boolean;
+	inferFunctionReturnType: boolean;
+	inferMethodReturnType: boolean;
+}
+
 export interface ITsAutoReturnTypeResult {
 	allFunctions: IVisitedFunction[];
 	matchings: IVisitedFunction[];

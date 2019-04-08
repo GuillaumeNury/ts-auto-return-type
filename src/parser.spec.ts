@@ -4,7 +4,7 @@ import {
 	getFunctionNodes,
 } from './parser';
 
-import { IVisitedFunction } from './models';
+import { IVisitedFunction, DEFAULT_CONFIG } from './models';
 import { startNewExecution } from './executions';
 
 describe('Parser', () => {
@@ -14,7 +14,7 @@ describe('Parser', () => {
 				`${__dirname}/../test-data/basic.ts`,
 			);
 
-			const nodes = getFunctionNodes(selectedFile);
+			const nodes = getFunctionNodes(selectedFile, DEFAULT_CONFIG);
 
 			// basicFunction0, basicFunction1, basicFunction2, arrowInnerFunction, basicFunction3
 			// regularInnerFunction, basicFunction4, basicMethod, arrowFunction1, basicFunction5, arrowInnerFunction
@@ -27,7 +27,10 @@ describe('Parser', () => {
 				`${__dirname}/../test-data/basic.ts`,
 			);
 
-			const [firstNode] = getFunctionNodes(selectedFile);
+			const [firstNode] = getFunctionNodes(
+				selectedFile,
+				DEFAULT_CONFIG,
+			);
 			const enrichedFunctions = enrichFunctionNode(
 				selectedFile,
 				firstNode,
@@ -49,7 +52,7 @@ describe('Parser', () => {
 				`${__dirname}/../test-data/basic.ts`,
 			);
 
-			const nodes = getFunctionNodes(selectedFile);
+			const nodes = getFunctionNodes(selectedFile, DEFAULT_CONFIG);
 			const enrichedFunctions = enrichFunctionNodes(
 				selectedFile,
 				nodes,

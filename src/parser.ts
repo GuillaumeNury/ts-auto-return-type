@@ -4,6 +4,7 @@ import {
 	FonctionNode,
 	ITextToInsert,
 	IVisitedFunction,
+	ITsAutoReturnTypeConfig,
 } from './models';
 
 import { isFunctionNode } from './utils';
@@ -45,14 +46,17 @@ export function enrichFunctionNode(
 	});
 }
 
-export function getFunctionNodes(node: ts.Node): FonctionNode[] {
+export function getFunctionNodes(
+	node: ts.Node,
+	config: ITsAutoReturnTypeConfig,
+): FonctionNode[] {
 	return node.getChildren().reduce(
 		(acc, child) => {
-			if (isFunctionNode(child)) {
+			if (isFunctionNode(child, config)) {
 				acc.push(child);
 			}
 
-			return [...acc, ...getFunctionNodes(child)];
+			return [...acc, ...getFunctionNodes(child, config)];
 		},
 		[] as FonctionNode[],
 	);

@@ -5,6 +5,8 @@ import {
 	IPosition,
 	ITextToInsert,
 	ITsAutoReturnTypeExecution,
+	ITsAutoReturnTypeConfig,
+	DEFAULT_CONFIG,
 } from './models';
 import { enrichFunctionNodes, getFunctionNodes } from './parser';
 import {
@@ -15,10 +17,11 @@ import {
 export function getModificationsAtPosition(
 	fileName: string,
 	position: IPosition,
+	config: ITsAutoReturnTypeConfig = DEFAULT_CONFIG,
 ): ITextToInsert[] {
 	const { selectedFile, typeChecker } = startNewExecution(fileName);
 
-	const functionNodes = getFunctionNodes(selectedFile);
+	const functionNodes = getFunctionNodes(selectedFile, config);
 	const matchingNodes = functionsAtPosition(
 		selectedFile,
 		functionNodes,
@@ -36,10 +39,11 @@ export function getModificationsAtPosition(
 
 export function getModificationsForFile(
 	fileName: string,
+	config: ITsAutoReturnTypeConfig = DEFAULT_CONFIG,
 ): ITextToInsert[] {
 	const { selectedFile, typeChecker } = startNewExecution(fileName);
 
-	const functionNodes = getFunctionNodes(selectedFile);
+	const functionNodes = getFunctionNodes(selectedFile, config);
 
 	const enriched = enrichFunctionNodes(
 		selectedFile,
