@@ -11,7 +11,9 @@ export function isFunctionNode(
 	node: ts.Node,
 ): node is ts.FunctionDeclaration | ts.MethodDeclaration {
 	return (
-		ts.isFunctionDeclaration(node) || ts.isMethodDeclaration(node)
+		ts.isFunctionDeclaration(node) ||
+		ts.isMethodDeclaration(node) ||
+		ts.isArrowFunction(node)
 	);
 }
 

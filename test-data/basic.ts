@@ -37,3 +37,12 @@ class A {
 		return 42;
 	}
 }
+
+// @ts-ignore
+const arrowFunction1 = (one, two) => 'string';
+
+// @ts-ignore
+function basicFunction5(): void {
+	let app: any;
+	app.use(() => 'string');
+}

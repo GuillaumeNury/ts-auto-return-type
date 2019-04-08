@@ -9,16 +9,16 @@ import { startNewExecution } from './executions';
 
 describe('Parser', () => {
 	describe('getFunctionNodes', () => {
-		it('should return 7 on basic.ts file', () => {
+		it('should return 11 on basic.ts file', () => {
 			const { selectedFile } = startNewExecution(
 				`${__dirname}/../test-data/basic.ts`,
 			);
 
 			const nodes = getFunctionNodes(selectedFile);
 
-			// basicFunction0, basicFunction1, basicFunction2, basicFunction3
-			// regularInnerFunction, basicFunction4, basicMethod
-			expect(nodes.length).toBe(7);
+			// basicFunction0, basicFunction1, basicFunction2, arrowInnerFunction, basicFunction3
+			// regularInnerFunction, basicFunction4, basicMethod, arrowFunction1, basicFunction5, arrowInnerFunction
+			expect(nodes.length).toBe(11);
 		});
 	});
 	describe('enrichFunctionNode', () => {
@@ -85,6 +85,16 @@ describe('Parser', () => {
 					},
 				},
 				{
+					inferredReturnType: 'number',
+					textToInsert: {
+						text: ': number',
+						position: {
+							line: 14,
+							character: 30,
+						},
+					},
+				},
+				{
 					name: 'basicFunction3',
 					inferredReturnType: 'number',
 					textToInsert: {
@@ -128,25 +138,34 @@ describe('Parser', () => {
 						},
 					},
 				},
+				{
+					inferredReturnType: 'string',
+					textToInsert: {
+						text: ': string',
+						position: {
+							line: 41,
+							character: 33,
+						},
+					},
+				},
+				{
+					inferredReturnType: 'void',
+					name: 'basicFunction5',
+					textToInsert: null,
+				},
+				{
+					inferredReturnType: 'string',
+					textToInsert: {
+						position: {
+							character: 11,
+							line: 46,
+						},
+						text: ': string',
+					},
+				},
 			] as IVisitedFunction[];
 
 			expect(enrichedFunctions).toEqual(expected);
-		});
-		it('should return an empty array if typeChecker cannot find symbol', () => {
-			const { selectedFile, typeChecker } = startNewExecution(
-				`${__dirname}/../test-data/basic.ts`,
-			);
-
-			typeChecker.getSymbolAtLocation = () => undefined;
-
-			const [firstNode] = getFunctionNodes(selectedFile);
-			const enrichedFunctions = enrichFunctionNode(
-				selectedFile,
-				firstNode,
-				typeChecker,
-			);
-
-			expect(enrichedFunctions).toEqual([]);
 		});
 	});
 });

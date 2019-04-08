@@ -7,7 +7,7 @@ export interface ITsAutoReturnTypeResult {
 }
 
 export interface IVisitedFunction {
-	name: string;
+	name?: string;
 	inferredReturnType: string;
 	textToInsert: ITextToInsert | null;
 }
