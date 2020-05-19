@@ -32,7 +32,7 @@ export function enrichFunctionNode(
 
 	return typeOfFunction.getCallSignatures().map(signature => {
 		const type = signature.getReturnType();
-		const typeAsString = typeChecker.typeToString(type);
+		const typeAsString = typeChecker.typeToString(type, undefined, ts.TypeFormatFlags.NoTruncation);
 
 		const textToInsert = getTextToInsert(file, node, typeAsString);
 		const symbol =

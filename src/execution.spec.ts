@@ -56,6 +56,23 @@ describe('Execution', () => {
 				},
 			]);
 		});
+		it('should return not truncated type on veryLongReturnType', () => {
+			const modifications = getModificationsAtPosition(
+				`${__dirname}/../test-data/issue-vscode-3.ts`,
+				{ line: 0, character: 0 },
+			);
+			const expectedType = `: { a0123456789: { b0123456789: { c0123456789: { d0123456789: { e0123456789: { a0123456789: { b0123456789: { c0123456789: { d0123456789: { e0123456789: number; }; }; }; }; }; }; }; }; }; b0123456789: { c0123456789: { d0123456789: { e0123456789: { a0123456789: { b0123456789: { c0123456789: { d0123456789: { e0123456789: number; }; }; }; }; }; }; }; }; c0123456789: { d0123456789: { e0123456789: { a0123456789: { b0123456789: { c0123456789: { d0123456789: { e0123456789: number; }; }; }; }; }; }; }; }`;
+
+			expect(modifications).toEqual([
+				{
+					text: expectedType,
+					position: {
+						line: 0,
+						character: 29,
+					},
+				},
+			]);
+		});
 	});
 
 	describe('getModificationsForFile', () => {
