@@ -1,6 +1,6 @@
 {
 	"name": "ts-auto-return-type",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Use typescript API in order to show functions without return type.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
